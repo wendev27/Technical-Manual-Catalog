@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Browse and search technical manuals and files on a flash drive."
+    />
+    <title>Flash Drive Manuals — Live Catalog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap">
+        <h1>Flash Drive Manuals</h1>
+        <p>
+          Live catalog of the files on your selected drive. Browse folders or
+          search for a filename or path.
+        </p>
+        <div class="metrics" aria-live="polite">
+          <div class="metric">
+            <strong id="document-count">—</strong>
+            <span>documents</span>
+          </div>
+          <div class="metric">
+            <strong id="folder-count">—</strong>
+            <span>folders</span>
+          </div>
+          <div class="metric">
+            <strong id="file-count">—</strong>
+            <span>files</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="controls">
+      <div class="wrap">
+        <div class="control-row">
+          <div class="search-wrap">
+            <label for="search" aria-hidden="true">⌕</label>
+            <input
+              id="search"
+              type="search"
+              autocomplete="off"
+              placeholder="Search a filename or folder…"
+              aria-label="Search files and folders"
+            />
+          </div>
+          <button class="button" id="rescan" type="button">Rescan drive</button>
+          <button class="button" id="expand" type="button">Expand top-level folders</button>
+          <button class="button" id="collapse" type="button">Collapse all</button>
+        </div>
+        <div class="results" id="results" role="status" aria-live="polite">
+          Scanning drive…
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="notice">
+        <strong>Local-file note:</strong> run this catalog using
+        <code>node server.js "/path/to/drive"</code>, then open
+        <code>http://127.0.0.1:4317</code>. The server scans the drive when this
+        page loads. Use <strong>Rescan drive</strong> after adding files while
+        the page is open. Your files stay on your computer.
+      </div>
+    </div>
+    <main class="wrap">
+      <section class="root-files" aria-labelledby="root-title">
+        <h2 id="root-title">Drive contents</h2>
+        <div class="catalog" id="catalog" aria-busy="true"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        Catalog indexes regular files and folders. Hidden entries and symbolic
+        links are not followed.
+      </div>
+    </footer>
+  </body>
+</html>
